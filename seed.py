@@ -32,7 +32,7 @@ def seed_db():
             db.refresh(cycle)
 
         # Create Admin
-        admin_email = "admin@atomquest.demo"
+        admin_email = "admin@gmail.com"
         admin = db.query(models.User).filter_by(email=admin_email).first()
         if not admin:
             admin = models.User(
@@ -47,7 +47,7 @@ def seed_db():
             db.refresh(admin)
 
         # Create Manager
-        manager_email = "manager@atomquest.demo"
+        manager_email = "manager@gmail.com"
         manager = db.query(models.User).filter_by(email=manager_email).first()
         if not manager:
             manager = models.User(
@@ -62,7 +62,7 @@ def seed_db():
             db.refresh(manager)
 
         # Create Employee
-        emp_email = "employee@atomquest.demo"
+        emp_email = "employee@gmail.com"
         emp = db.query(models.User).filter_by(email=emp_email).first()
         if not emp:
             emp = models.User(

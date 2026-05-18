@@ -58,7 +58,10 @@ def logout(response: Response):
 @router.get("/me", response_model=schemas.UserResponse)
 def read_me(current_user: models.User = Depends(auth.get_current_user)):
     """Returns the currently authenticated user's profile."""
-    return current_user
+    response_data = schemas.UserResponse.from_orm(current_user)
+    if current_user.manager:
+        response_data.manager_name = current_user.manager.name
+    return response_data
 
 
 @router.post("/register", response_model=schemas.UserResponse, status_code=status.HTTP_201_CREATED)
@@ -67,6 +70,13 @@ def register(
     db: Session = Depends(database.get_db),
 ):
     """Register a new user (employee, manager, admin) and hash their password."""
+    # Enforce @gmail.com email constraint
+    if not user_in.email.endswith("@gmail.com"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email address must end with @gmail.com.",
+        )
+
     # Check if email is already in use
     existing = db.query(models.User).filter(models.User.email == user_in.email).first()
     if existing:

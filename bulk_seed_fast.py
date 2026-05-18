@@ -74,18 +74,18 @@ def main():
     for i in range(10):
         uid = gen_id()
         cur.execute("INSERT OR IGNORE INTO users (id,name,email,password_hash,role,department,is_active) VALUES (?,?,?,?,?,?,1)",
-            (uid, f"Admin {i+1}", f"admin{i+1}@atomquest.demo",
+            (uid, f"Admin {i+1}", f"admin{i+1}@gmail.com",
              fake_pw_hash("Demo@123"), "ADMIN", DEPARTMENTS[i % 10]))
-        cur.execute("SELECT id FROM users WHERE email=?", (f"admin{i+1}@atomquest.demo",))
+        cur.execute("SELECT id FROM users WHERE email=?", (f"admin{i+1}@gmail.com",))
         admin_ids.append(cur.fetchone()[0])
 
     manager_ids = []
     for i in range(100):
         uid = gen_id()
         cur.execute("INSERT OR IGNORE INTO users (id,name,email,password_hash,role,department,is_active) VALUES (?,?,?,?,?,?,1)",
-            (uid, f"Manager {i+1}", f"manager{i+1}@atomquest.demo",
+            (uid, f"Manager {i+1}", f"manager{i+1}@gmail.com",
              fake_pw_hash("Demo@123"), "MANAGER", DEPARTMENTS[i % 10]))
-        cur.execute("SELECT id FROM users WHERE email=?", (f"manager{i+1}@atomquest.demo",))
+        cur.execute("SELECT id FROM users WHERE email=?", (f"manager{i+1}@gmail.com",))
         manager_ids.append(cur.fetchone()[0])
 
     con.commit()
@@ -107,7 +107,7 @@ def main():
         approved_at = now_str if status == "APPROVED" else None
 
         user_rows.append((
-            emp_id, f"Employee {i+1}", f"employee{i+1}@atomquest.demo",
+            emp_id, f"Employee {i+1}", f"employee{i+1}@gmail.com",
             fake_pw_hash("Demo@123"), "EMPLOYEE", dept, mgr_id, 1
         ))
 
@@ -168,9 +168,9 @@ Bulk Seed Complete!
   Time taken  : {elapsed:.1f}s
 
 Login credentials (password: Demo@123):
-  admin1@atomquest.demo
-  manager1@atomquest.demo
-  employee1@atomquest.demo
+  admin1@gmail.com
+  manager1@gmail.com
+  employee1@gmail.com
 """)
 
 if __name__ == "__main__":

@@ -78,7 +78,7 @@ def bulk_seed():
         # ── Admins ────────────────────────────────────────────
         admins = []
         for i in range(10):
-            email = f"admin{i+1}@atomquest.demo"
+            email = f"admin{i+1}@gmail.com"
             u = db.query(models.User).filter_by(email=email).first()
             if not u:
                 u = models.User(
@@ -95,7 +95,7 @@ def bulk_seed():
         # ── Managers ──────────────────────────────────────────
         managers = []
         for i in range(100):
-            email = f"manager{i+1}@atomquest.demo"
+            email = f"manager{i+1}@gmail.com"
             u = db.query(models.User).filter_by(email=email).first()
             if not u:
                 u = models.User(
@@ -115,7 +115,7 @@ def bulk_seed():
         created = 0
 
         for i in range(total_employees):
-            email = f"employee{i+1}@atomquest.demo"
+            email = f"employee{i+1}@gmail.com"
             if db.query(models.User).filter_by(email=email).first():
                 continue
 
@@ -168,9 +168,9 @@ def bulk_seed():
         print(f"  Total admins:   10")
         print(f"  Total users:    {created + 110}")
         print(f"\nLogin credentials:")
-        print(f"  Admin:    admin1@atomquest.demo / Demo@123")
-        print(f"  Manager:  manager1@atomquest.demo / Demo@123")
-        print(f"  Employee: employee1@atomquest.demo / Demo@123")
+        print(f"  Admin:    admin1@gmail.com / Demo@123")
+        print(f"  Manager:  manager1@gmail.com / Demo@123")
+        print(f"  Employee: employee1@gmail.com / Demo@123")
 
     except Exception as e:
         print(f"Error: {e}")

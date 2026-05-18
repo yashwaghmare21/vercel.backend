@@ -23,6 +23,7 @@ class UserCreate(UserBase):
 class UserResponse(UserBase):
     id: str
     is_active: bool
+    manager_name: Optional[str] = None
 
     class Config:
         orm_mode = True
